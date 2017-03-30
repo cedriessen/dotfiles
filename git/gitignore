@@ -24,5 +24,16 @@ bower_components
 node_modules
 npm-debug.log
 
-# IDEs stuff
-.idea
+# IntelliJ IDEA files
+*.iml
+*.ipr
+*.iws
+*.ids
+.idea/
+
+.ocb
+.ocb.provision
+
+target/
+0_archive/
+

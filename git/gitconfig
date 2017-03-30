@@ -1,16 +1,41 @@
 # A good list of alises http://haacked.com/archive/2014/07/28/github-flow-aliases/
 [alias]
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Complex
+
+        changelog = !~/dev/gitscripts/git-changelog.sh
+        find-similar = !~/dev/gitscripts/git-find-similar.sh
+        merge-bases = !~/dev/gitscripts/git-merge-bases
+        my-stash = !~/dev/gitscripts/git-my-stash.sh
+        show-branch-dev-master = !~/dev/gitscripts/git-show-branch-dev-master.sh
+        onbranch = !~/dev/gitscripts/git-on-branch.sh
+        author = !~/dev/gitscripts/git-author.sh
+        pdiff = diff --no-color
+        modified-modules = !/usr/local/bin/elixir -r ~/dev/gitscripts/git.exs ~/dev/gitscripts/git_modified_modules.exs
+        commit-diff = !~/dev/gitscripts/git-commit-diff.sh
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Staging
+
         a = add
         aa = add --all
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Branch
-        br = branch
+
+        b = branch
         branch-name = rev-parse --abbrev-ref HEAD
         branch-diff = diff master...HEAD
         branch-files = "!git diff master...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
+        branches-gone = "!git branch -vv|grep gone"
+        branches-remote = "!f() { \
+            remote="${1:-origin}"; \
+            git ls-remote --heads "$remote"; \
+        }; f"
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Commit
+
         c = commit
         ca = commit -a
         cm = commit -m
@@ -20,136 +45,94 @@
         amend = commit --amend
         amend-all = !git add --all && git commit --amend --reuse-message=HEAD
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Clone
+
         cl = clone
         sclone = clone --depth=1
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Checkout
+
         co = checkout
         cb = checkout -b
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Cherry-pick
+
         cp = cherry-pick
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Diff
+
         d = diff --color-words
         dc = diff --cached
         df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-        # Merge
-        m = merge
-
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Pull
-        up = pull
-        plom = pull origin master
-        plum = pull upstream master
-        preb = !git fetch upstream && git rebase upstream/master
 
-        # Push
-        p = push
-        pom = push origin master
-        poh = push origin head
+        up = pull --prune
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Stash
+
         st = stash
         stp = stash pop
+      	stl = stash list
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Status/Logging
+
         s = status
         ss = status -sb
         hist = log --graph --pretty=custom           # Show custom graph
         l = log --pretty=custom                      # Show custom log
         ll = log --stat --abbrev-commit
+        lp = log -p --stat
         lc = shortlog --summary --numbered           # List contributors
+        lg = log --graph --oneline
+        ln = !git log --no-merges HEAD "^${1:-develop}"     # Log new: Anything new on HEAD?
+        hs = rev-parse head                          # SHA of HEAD
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Reset
+
         unstage = reset HEAD --                      # Mixed reset (affects HEAD and Index)
         undo = reset --soft HEAD~1                   # Undo last commit (affects HEAD only)
         reset = reset --hard HEAD~1                  # Remove last commit (from HEAD, Index and Working Dir)
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Remote
+
         r = remote -v
 
-        # Submodules
-        subpl = submodule update --init --recursive
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Find
 
-        # Git flow
-        new = !git pull origin develop && git flow feature start
-        done = !git pull origin develop && git flow feature finish "$(git symbolic-ref --short HEAD | sed -n 's/^feature\\///p')"
-        go = !git checkout $1 && pull
-        master = !git checkout master && pull
-        develop = !git checkout develop && pull
-        mmm = !git fetch origin master && git rebase origin/master
-        ddd = !git fetch origin develop && git rebase origin/develop
+        # commits by source code
+        find-code = "!f() { \
+            git log --pretty=custom --decorate --date=short -S\"$1\"; \
+        }; f"
 
+        # commits by message
+        find-message = "!f() { \
+            git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
+        }; f"
+
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Misc
-        publish = "!git push --set-upstream origin $(git branch-name)"
 
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # Remove the tag with the specified tag name if
+        # exists and tag the latest commit with that name
 
-  # Find commits by source code
+        retag = "!f() { \
+            git tag -d "$1" &> /dev/null; \
+            git tag $1; \
+        }; f"
 
-  cc = "!f() { \
-      git log --pretty=custom --decorate --date=short -S\"$1\"; \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Find commits by commit message
-
-  cm = "!f() { \
-      git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Credit an author on the latest commit
-
-  credit = "!f() { \
-      if [ -n \"$1\" ] && [ -n \"$2\" ]; then \
-          git commit --amend --author \"$1 <$2>\" -C HEAD; \
-      fi \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # List remote branches
-
-  lrb = "!f() { \
-      remote="${1:-origin}"; \
-      git ls-remote --heads "$remote"; \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Merge GitHub pull request on top of the current branch or,
-  # if a branch name is specified, on top of the specified branch
-
-  mpr = "!f() { \
-      declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
-      declare branch=\"${2:-$currentBranch}\"; \
-      if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
-          git fetch origin refs/pull/$1/head:pr/$1 && \
-          git checkout -B $branch && \
-          git rebase $branch pr/$1 && \
-          git checkout -B $branch && \
-          git merge pr/$1 && \
-          git branch -D pr/$1 && \
-          git commit --amend -m \"$(git log -1 --pretty=%B)\n\nClose #$1\"; \
-      fi \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  # Remove the tag with the specified tag name if
-  # exists and tag the latest commit with that name
-
-  retag = "!f() { \
-      git tag -d "$1" &> /dev/null; \
-      git tag $1; \
-  }; f"
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # So much color
 [color]
@@ -180,15 +163,20 @@
 # Git mergetool
 [merge]
         tool = opendiff
+        renameLimit = 2000
 
 [core]
-        editor = nano
-        abbrev = 12
+        editor = vim
+#        abbrev = 12
         attributesfile = ~/.gitattributes
         excludesfile = ~/.gitignore
         autocrlf = input
-        mergeoptions = --no-edit
-        ignorecase = false
+#        mergeoptions = --no-edit
+#        ignorecase = false
+
+[user]
+	      name = Christoph Driessen
+	      email = cdriessen@extron.com
 
 [pager]
         # Insanely beautiful diffs ==> npm install -g diff-so-fancy
@@ -211,46 +199,49 @@
         # Correct typos
         autocorrect = 1
 
-# Any GitHub repo with my username should be checked out r/w by default
-# http://rentzsch.tumblr.com/post/564806957/public-but-hackable-git-submodules
-[url "git@github.com:nicksp/"]
-        insteadOf = "git://github.com/nicksp/"
-
-# Rewrites of repo paths
-[url "git@github.com:"]
-        insteadOf = "gh:"
-        insteadOf = "git://github.com"
-        pushInsteadOf = "github:"
-        pushInsteadOf = "git://github.com/"
-        pushInsteadOf = "https://github.com/"
-
-[url "git://github.com/"]
-        insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-        insteadOf = "gst:"
-        pushInsteadOf = "gist:"
-        pushInsteadOf = "git://gist.github.com/"
-        pushInsteadOf = "https://gist.github.com/"
-
-[url "git://gist.github.com/"]
-        insteadOf = "gist:"
-
-# Push easily http://stackoverflow.com/a/23918418/89484
-[push]
-        # Make `git push` automatically push relevant
-        # annotated tags when pushing branches out
-        followTags = true
-        default = current
-
-# Use separate file for username / github token / etc
-[include]
-        path = ~/.gitconfig.local
-
-[filter "lfs"]
-        clean = git lfs clean %f
-        smudge = git lfs smudge %f
-        required = true
-
 [fetch]
         prune = true
+
+
+# Any GitHub repo with my username should be checked out r/w by default
+# http://rentzsch.tumblr.com/post/564806957/public-but-hackable-git-submodules
+#[url "git@github.com:nicksp/"]
+#        insteadOf = "git://github.com/nicksp/"
+
+# Rewrites of repo paths
+#[url "git@github.com:"]
+#        insteadOf = "gh:"
+#        insteadOf = "git://github.com"
+#        pushInsteadOf = "github:"
+#        pushInsteadOf = "git://github.com/"
+#        pushInsteadOf = "https://github.com/"
+
+#[url "git://github.com/"]
+#        insteadOf = "github:"
+
+#[url "git@gist.github.com:"]
+#        insteadOf = "gst:"
+#        pushInsteadOf = "gist:"
+#        pushInsteadOf = "git://gist.github.com/"
+#        pushInsteadOf = "https://gist.github.com/"
+
+#[url "git://gist.github.com/"]
+#        insteadOf = "gist:"
+
+# Push easily http://stackoverflow.com/a/23918418/89484
+#[push]
+#        # Make `git push` automatically push relevant
+#        # annotated tags when pushing branches out
+#        followTags = true
+#        default = current
+#	      default = simple
+
+
+# Use separate file for username / github token / etc
+#[include]
+#        path = ~/.gitconfig.local
+
+#[filter "lfs"]
+#        clean = git lfs clean %f
+#        smudge = git lfs smudge %f
+#        required = true

@@ -330,6 +330,7 @@ main
 
 # Install Zsh settings
 ln -s ~/dotfiles/zsh/themes/nick.zsh-theme $HOME/.oh-my-zsh/themes
+ln -s ~/dotfiles/zsh/themes/ced.zsh-theme $HOME/.oh-my-zsh/themes
 
 
 ###############################################################################
