@@ -12,12 +12,6 @@ fi
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# SSH
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
@@ -50,17 +44,8 @@ less_options=(
 export LESS="${less_options[*]}"
 export PAGER='less'
 
-# Load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
 # Homebrew cask
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # keep OSX from putting an icon into the Dock!
 export JAVA_TOOL_OPTIONS="-Dapple.awt.UIElement=true"
-
-# here's LS_COLORS
-# github.com/trapd00r/LS_COLORS
-# command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"
-# eval "$(gdircolors -b ~/.dircolors)"
