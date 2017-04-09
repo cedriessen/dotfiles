@@ -9,3 +9,9 @@ unsetopt share_history # Disable sharing history between terminals (sessions)
 
 # Expansion and Globbing
 setopt extended_glob # treat #, ~, and ^ as part of patterns for filename generation
+
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+
+# Make completion items selectable via arrow keys
+zstyle ':completion:*' menu select
