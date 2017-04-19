@@ -1,0 +1,3 @@
+" fix arrow key navigation in input mode
+" http://vim.wikia.com/wiki/Fix_broken_arrow_key_navigation_in_insert_mode
+:set term=builtin_ansi
