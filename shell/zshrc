@@ -42,11 +42,8 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
-# Source local extra (private) settings specific to machine if it exists
-#[ -f ~/.zsh.local ] && source ~/.zsh.local
-
-# npm tab completion
-#. <(npm completion)
+# z is the new cd. https://github.com/rupa/z
+. ~/z/z.sh
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # zplug
