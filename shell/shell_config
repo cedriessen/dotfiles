@@ -15,3 +15,15 @@ bindkey '^E' end-of-line
 
 # Make completion items selectable via arrow keys
 zstyle ':completion:*' menu select
+
+# Make zsh split strings like bash
+# Example
+# x="multi
+# line
+# string
+# "
+# for y in $x; do echo ">$y"; done
+# >multi
+# >line
+# >string
+setopt shwordsplit
