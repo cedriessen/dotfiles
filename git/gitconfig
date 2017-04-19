@@ -72,7 +72,7 @@
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Pull
 
-        up = pull --prune
+        pp = pull --prune
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Stash
@@ -92,7 +92,7 @@
         lp = log -p --stat
         lc = shortlog --summary --numbered           # List contributors
         lg = log --graph --oneline
-        ln = !git log --no-merges HEAD "^${1:-develop}"     # Log new: Anything new on HEAD?
+        ln = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
         hs = rev-parse head                          # SHA of HEAD
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
