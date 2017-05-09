@@ -87,7 +87,9 @@
         s = status
         ss = status -sb
         hist = log --graph --pretty=custom           # Show custom graph
-        l = log --pretty=custom                      # Show custom log
+        l = log --pretty=custom                      # Show custom log with relative date
+        lf = log --pretty=customfulldate             # Show custom log with full date
+        lff = log --pretty=customfulldates           # Show custom log with full date both author and committer
         ll = log --stat --abbrev-commit
         lp = log -p --stat
         lc = shortlog --summary --numbered           # List contributors
@@ -188,6 +190,8 @@
         textconv = hexdump -v -C
 
 [pretty]
+	      customfulldate = "%C(magenta)%h%C(red)%d %C(yellow)%ai %C(green)%s %C(yellow)(%an)"
+	      customfulldates = "%C(magenta)%h%C(red)%d %C(yellow)a=%ai %C(blue)c=%ci %C(green)%s %C(yellow)(%an)"
         custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
         #                     │        │            │            │             └─ author name
         #                     │        │            │            └─ message
