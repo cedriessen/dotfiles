@@ -37,3 +37,5 @@ npm-debug.log
 target/
 0_archive/
 
+__*
+
