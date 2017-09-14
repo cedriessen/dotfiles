@@ -177,8 +177,8 @@
 #        ignorecase = false
 
 [user]
-	      name = Christoph Driessen
-	      email = cdriessen@extron.com
+	name = Christoph Drießen
+	email = cdriessen@extron.com
 
 [pager]
         # Insanely beautiful diffs ==> npm install -g diff-so-fancy
