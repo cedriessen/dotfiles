@@ -147,23 +147,24 @@ shellswitch () {
 }
 
 
+# Disabled in favor of JDKMAN
 # JDK/Java
 # see http://www.jayway.com/2014/01/15/how-to-switch-jdk-version-on-mac-os-x-maverick/
-setjdk () {
-if [ $# -ne 0 ]; then
-  set_jdk_remove_from_path '/System/Library/Frameworks/JavaVM.framework/Home/bin'
-  if [ -n "${JAVA_HOME+x}" ]; then
-    set_jdk_remove_from_path $JAVA_HOME
-  fi
-  export JAVA_HOME=`/usr/libexec/java_home -v $@`
-  export PATH=$JAVA_HOME/bin:$PATH
-fi
-java -version
-}
+#setjdk () {
+#if [ $# -ne 0 ]; then
+#  set_jdk_remove_from_path '/System/Library/Frameworks/JavaVM.framework/Home/bin'
+#  if [ -n "${JAVA_HOME+x}" ]; then
+#    set_jdk_remove_from_path $JAVA_HOME
+#  fi
+#  export JAVA_HOME=`/usr/libexec/java_home -v $@`
+#  export PATH=$JAVA_HOME/bin:$PATH
+#fi
+#java -version
+#}
 
-set_jdk_remove_from_path () {
-  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
-}
+#set_jdk_remove_from_path () {
+#  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+#}
 
 # Docker
 docker_init() {
