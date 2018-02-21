@@ -96,7 +96,7 @@
         lg = log --graph --oneline
         ln = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
         hs = rev-parse head                          # SHA of HEAD
-        incoming = !"git fetch; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges"
+        incoming = !"git fetch; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Reset
