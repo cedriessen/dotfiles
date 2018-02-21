@@ -96,6 +96,7 @@
         lg = log --graph --oneline
         ln = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
         hs = rev-parse head                          # SHA of HEAD
+        incoming = !"git fetch; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges"
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Reset
@@ -171,13 +172,13 @@
         editor = vim
 #        abbrev = 12
         attributesfile = ~/.gitattributes
-        excludesfile = ~/.gitignore
+	      excludesfile = /Users/ced/.gitignore
         autocrlf = input
 #        mergeoptions = --no-edit
 #        ignorecase = false
 
 [user]
-	name = Christoph Drießen
+	name = Christoph Driessen
 	email = cdriessen@extron.com
 
 [pager]
@@ -249,3 +250,11 @@
 #        clean = git lfs clean %f
 #        smudge = git lfs smudge %f
 #        required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/ced/.stCommitMsg
