@@ -94,7 +94,12 @@
         lp = log -p --stat
         lc = shortlog --summary --numbered           # List contributors
         lg = log --graph --oneline
-        ln = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
+        lns = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
+        ln = "!f() { \
+          against=${@: -1}; \
+          params=${@::${#@}-1}; \
+          git log --no-merges ${params} HEAD "^${against}"; \
+        }; f"
         hs = rev-parse head                          # SHA of HEAD
         incoming = !"git fetch; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
 
@@ -252,7 +257,7 @@
 #        required = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
