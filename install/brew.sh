@@ -9,4 +9,6 @@ if test ! $(which brew); then
 fi
 
 brew tap homebrew/bundle
+
+# Use Brewfile to install required formulae
 brew bundle

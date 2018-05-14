@@ -166,10 +166,10 @@ shellswitch () {
 #  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 #}
 
-# Docker
-docker_init() {
-  machine="$1"
-  docker-machine start ${machine}
-  eval $(docker-machine env ${machine})
-  docker-machine ip ${machine}
-}
+# Docker - disabled since moved to Docker for Mac
+#docker_init() {
+#  machine="$1"
+#  docker-machine start ${machine}
+#  eval $(docker-machine env ${machine})
+#  docker-machine ip ${machine}
+#}
