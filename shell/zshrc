@@ -81,3 +81,7 @@ source "/usr/local/opt/nvm/nvm.sh"
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/ced/.sdkman"
 [[ -s "/Users/ced/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/ced/.sdkman/bin/sdkman-init.sh"
+
+# Openshift Development
+# https://extron-irc.slack.com/archives/G032QHWLP/p1528806298000608
+export COPYFILE_DISABLE=1
