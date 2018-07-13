@@ -103,6 +103,14 @@
         hs = rev-parse head                          # SHA of HEAD
         incoming = !"git fetch; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
 
+        # https://stackoverflow.com/questions/10622179/how-to-find-identify-large-files-commits-in-git-history
+        # to clean the repo https://rtyley.github.io/bfg-repo-cleaner/
+        blobsize = !"git rev-list --objects --all \
+            | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
+            | sed -n 's/^blob //p' \
+            | sort --numeric-sort --key=2 \
+            | cut -c 1-12,41-"
+
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Reset
 
