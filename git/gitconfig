@@ -100,8 +100,16 @@
           params=${@::${#@}-1}; \
           git log --no-merges ${params} HEAD "^${against}"; \
         }; f"
-        hs = rev-parse head                          # SHA of HEAD
-        incoming = !"git fetch; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
+        # list new local (compared to remote)
+        lnl = "!f() { \
+          local_branch=${1:-$(git cb)}; \
+          remote_branch=origin/$local_branch; \
+          git log --pretty=custom --no-merges $local_branch "^$remote_branch"; \
+        }; f"
+
+        # show SHA of HEAD
+        hs = rev-parse head
+        incoming = !"git fetch --prune; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
 
         # https://stackoverflow.com/questions/10622179/how-to-find-identify-large-files-commits-in-git-history
         # to clean the repo https://rtyley.github.io/bfg-repo-cleaner/
@@ -110,6 +118,9 @@
             | sed -n 's/^blob //p' \
             | sort --numeric-sort --key=2 \
             | cut -c 1-12,41-"
+
+        # show current branch name
+        cb = !git rev-parse --abbrev-ref HEAD
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Reset
