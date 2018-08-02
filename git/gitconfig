@@ -86,29 +86,29 @@
 
         s = status
         ss = status -sb
-        hist = log --graph --pretty=custom           # Show custom graph
         l = log --pretty=custom                      # Show custom log with relative date
         lf = log --pretty=customfulldate             # Show custom log with full date
         lff = log --pretty=customfulldates           # Show custom log with full date both author and committer
         ll = log --stat --abbrev-commit
         lp = log -p --stat
-        lc = shortlog --summary --numbered           # List contributors
-        lg = log --graph --oneline
+        log-contributors = shortlog --summary --numbered --no-merges
+        log-graph = log --graph --oneline
         lns = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
         ln = "!f() { \
           against=${@: -1}; \
           params=${@::${#@}-1}; \
+          echo "params:$params -- against:$against"; \
           git log --no-merges ${params} HEAD "^${against}"; \
         }; f"
         # list new local (compared to remote)
-        lnl = "!f() { \
+        ln-local = "!f() { \
           local_branch=${1:-$(git cb)}; \
           remote_branch=origin/$local_branch; \
           git log --pretty=custom --no-merges $local_branch "^$remote_branch"; \
         }; f"
 
         # show SHA of HEAD
-        hs = rev-parse head
+        head-sha = rev-parse head
         incoming = !"git fetch --prune; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
 
         # https://stackoverflow.com/questions/10622179/how-to-find-identify-large-files-commits-in-git-history
