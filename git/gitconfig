@@ -106,6 +106,12 @@
           remote_branch=origin/$local_branch; \
           git log --pretty=custom --no-merges $local_branch "^$remote_branch"; \
         }; f"
+        # list new remote (compared to local). Run a fetch first
+        ln-remote = "!f() { \
+          local_branch=${1:-$(git cb)}; \
+          remote_branch=origin/$local_branch; \
+          git log --pretty=custom --no-merges "^$local_branch" $remote_branch; \
+        }; f"
 
         # show SHA of HEAD
         head-sha = rev-parse head
