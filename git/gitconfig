@@ -91,7 +91,10 @@
         lff = log --pretty=customfulldates           # Show custom log with full date both author and committer
         ll = log --stat --abbrev-commit
         lp = log -p --stat
+
+        # log commits per author using .mailmap
         log-contributors = shortlog --summary --numbered --no-merges
+
         log-graph = log --graph --oneline
         lns = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
         ln = "!f() { \
