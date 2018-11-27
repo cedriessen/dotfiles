@@ -77,9 +77,9 @@
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Stash
 
-        st = stash
-        stp = stash pop
       	stl = stash list
+      	wip-push = stash push -m WIP
+      	wip-pull = stash pop
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Status/Logging
