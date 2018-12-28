@@ -1,172 +1,178 @@
 # A good list of alises http://haacked.com/archive/2014/07/28/github-flow-aliases/
 [alias]
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Complex
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Complex
 
-        changelog = !~/dev/gitscripts/git-changelog.sh
-        find-similar = !~/dev/gitscripts/git-find-similar.sh
-        merge-bases = !~/dev/gitscripts/git-merge-bases
-        my-stash = !~/dev/gitscripts/git-my-stash.sh
-        show-branch-dev-master = !~/dev/gitscripts/git-show-branch-dev-master.sh
-        onbranch = !~/dev/gitscripts/git-on-branch.sh
-        author = !~/dev/gitscripts/git-author.sh
-        pdiff = diff --no-color
-        modified-modules = !/usr/local/bin/elixir -r ~/dev/gitscripts/git.exs ~/dev/gitscripts/git_modified_modules.exs
-        commit-diff = !~/dev/gitscripts/git-commit-diff.sh
+  changelog = !~/dev/gitscripts/git-changelog.sh
+  find-similar = !~/dev/gitscripts/git-find-similar.sh
+  merge-bases = !~/dev/gitscripts/git-merge-bases
+  my-stash = !~/dev/gitscripts/git-my-stash.sh
+  show-branch-dev-master = !~/dev/gitscripts/git-show-branch-dev-master.sh
+  onbranch = !~/dev/gitscripts/git-on-branch.sh
+  author = !~/dev/gitscripts/git-author.sh
+  pdiff = diff --no-color
+  modified-modules = !/usr/local/bin/elixir -r ~/dev/gitscripts/git.exs ~/dev/gitscripts/git_modified_modules.exs
+  commit-diff = !~/dev/gitscripts/git-commit-diff.sh
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Staging
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Staging
 
-        a = add
-        aa = add --all
+  a = add
+  aa = add --all
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Branch
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Branch
 
-        b = branch
-        branch-name = rev-parse --abbrev-ref HEAD
-        branch-diff = diff master...HEAD
-        branch-files = "!git diff master...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
-        branches-gone = "!git branch -vv|grep gone"
-        branches-remote = "!f() { \
-            remote="${1:-origin}"; \
-            git ls-remote --heads "$remote"; \
-        }; f"
+  b = branch
+  branch-name = rev-parse --abbrev-ref HEAD
+  branch-diff = diff master...HEAD
+  branch-files = "!git diff master...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
+  branches-gone = "!git branch -vv|grep gone"
+  branches-remote = "!f() { \
+      remote="${1:-origin}"; \
+      git ls-remote --heads "$remote"; \
+  }; f"
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Commit
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Commit
 
-        c = commit
-        ca = commit -a
-        cm = commit -m
-        cal = !git add -A && git commit              # Commit all changes
-        cam = commit -am
-        cne = commit --no-edit
-        amend = commit --amend
-        amend-all = !git add --all && git commit --amend --reuse-message=HEAD
+  c = commit
+  ca = commit -a
+  cm = commit -m
+  cal = !git add -A && git commit              # Commit all changes
+  cam = commit -am
+  cne = commit --no-edit
+  amend = commit --amend
+  amend-all = !git add --all && git commit --amend --reuse-message=HEAD
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Clone
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Clone
 
-        cl = clone
-        sclone = clone --depth=1
+  cl = clone
+  sclone = clone --depth=1
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Checkout
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Checkout
 
-        co = checkout
-        cb = checkout -b
+  co = checkout
+  cb = checkout -b
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Cherry-pick
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Cherry-pick
 
-        cp = cherry-pick
+  cp = cherry-pick
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Diff
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Diff
 
-        d = diff --color-words
-        dc = diff --cached
-        df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+  d = diff --color-words
+  dc = diff --cached
+  df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Pull
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Pull
 
-        pp = pull --prune
+  pp = pull --prune
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Stash
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Stash
 
-      	stl = stash list
-      	wip-push = stash push -m WIP
-      	wip-pull = stash pop
+  	stl = stash list
+  	wip-push = stash push -m WIP
+  	wip-pull = stash pop
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Status/Logging
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Status/Logging
 
-        s = status
-        ss = status -sb
-        l = log --pretty=custom                      # Show custom log with relative date
-        lf = log --pretty=customfulldate             # Show custom log with full date
-        lff = log --pretty=customfulldates           # Show custom log with full date both author and committer
-        ll = log --stat --abbrev-commit
-        lp = log -p --stat
+  s = status
+  ss = status -sb
+  l = log --pretty=custom                      # Show custom log with relative date
+  lf = log --pretty=customfulldate             # Show custom log with full date
+  lff = log --pretty=customfulldates           # Show custom log with full date both author and committer
+  ll = log --stat --abbrev-commit
+  lp = log -p --stat
 
-        # log commits per author using .mailmap
-        log-contributors = shortlog --summary --numbered --no-merges
+  # log commits per author using .mailmap
+  log-contributors = shortlog --summary --numbered --no-merges
 
-        log-graph = log --graph --oneline
-        lns = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
-        ln = "!f() { \
-          against=${@: -1}; \
-          params=${@::${#@}-1}; \
-          echo "params:$params -- against:$against"; \
-          git log --no-merges ${params} HEAD "^${against}"; \
-        }; f"
-        # list new local (compared to remote)
-        ln-local = "!f() { \
-          local_branch=${1:-$(git cb)}; \
-          remote_branch=origin/$local_branch; \
-          git log --pretty=custom --no-merges $local_branch "^$remote_branch"; \
-        }; f"
-        # list new remote (compared to local). Run a fetch first
-        ln-remote = "!f() { \
-          local_branch=${1:-$(git cb)}; \
-          remote_branch=origin/$local_branch; \
-          git log --pretty=custom --no-merges "^$local_branch" $remote_branch; \
-        }; f"
+  log-graph = log --graph --oneline
+  lns = !git log --pretty=custom --no-merges HEAD "^${1:-origin/develop}"     # Log new: Anything new on HEAD?
+  ln-this = "!f() { \
+    against=${@: -1}; \
+    params=${@::${#@}-1}; \
+    echo "new on HEAD against $against"; \
+    git log --no-merges ${params} HEAD "^${against}"; \
+  }; f"
+  ln-other = "!f() { \
+    against=${@: -1}; \
+    params=${@::${#@}-1}; \
+    echo "New on $against against HEAD"; \
+    git log --no-merges ${params} "^HEAD" "${against}"; \
+  }; f"
+  # list new local (compared to remote)
+  ln-local = "!f() { \
+    local_branch=${1:-$(git cb)}; \
+    remote_branch=origin/$local_branch; \
+    git log --pretty=custom --no-merges $local_branch "^$remote_branch"; \
+  }; f"
+  # list new remote (compared to local). Run a fetch first
+  ln-remote = "!f() { \
+    local_branch=${1:-$(git cb)}; \
+    remote_branch=origin/$local_branch; \
+    git log --pretty=custom --no-merges "^$local_branch" $remote_branch; \
+  }; f"
 
-        # show SHA of HEAD
-        head-sha = rev-parse head
-        incoming = !"git fetch --prune; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
+  # show SHA of HEAD
+  head-sha = rev-parse head
+  incoming = !"git fetch --prune; git log $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) '^HEAD' --no-merges --name-only"
 
-        # https://stackoverflow.com/questions/10622179/how-to-find-identify-large-files-commits-in-git-history
-        # to clean the repo https://rtyley.github.io/bfg-repo-cleaner/
-        blobsize = !"git rev-list --objects --all \
-            | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
-            | sed -n 's/^blob //p' \
-            | sort --numeric-sort --key=2 \
-            | cut -c 1-12,41-"
+  # https://stackoverflow.com/questions/10622179/how-to-find-identify-large-files-commits-in-git-history
+  # to clean the repo https://rtyley.github.io/bfg-repo-cleaner/
+  blobsize = !"git rev-list --objects --all \
+      | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
+      | sed -n 's/^blob //p' \
+      | sort --numeric-sort --key=2 \
+      | cut -c 1-12,41-"
 
-        # show current branch name
-        cb = !git rev-parse --abbrev-ref HEAD
+  # show current branch name
+  cb = !git rev-parse --abbrev-ref HEAD
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Reset
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Reset
 
-        unstage = reset HEAD --                      # Mixed reset (affects HEAD and Index)
-        undo = reset --soft HEAD~1                   # Undo last commit (affects HEAD only)
-        reset = reset --hard HEAD~1                  # Remove last commit (from HEAD, Index and Working Dir)
+  unstage = reset HEAD --                      # Mixed reset (affects HEAD and Index)
+  undo = reset --soft HEAD~1                   # Undo last commit (affects HEAD only)
+  reset = reset --hard HEAD~1                  # Remove last commit (from HEAD, Index and Working Dir)
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Remote
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Remote
 
-        r = remote -v
+  r = remote -v
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Find
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Find
 
-        # commits by source code
-        find-code = "!f() { \
-            git log --pretty=custom --decorate --date=short -S\"$1\"; \
-        }; f"
+  # commits by source code
+  find-code = "!f() { \
+      git log --pretty=custom --decorate --date=short -S\"$1\"; \
+  }; f"
 
-        # commits by message
-        find-message = "!f() { \
-            git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
-        }; f"
+  # commits by message
+  find-message = "!f() { \
+      git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
+  }; f"
 
 
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # Misc
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Misc
 
-        # Remove the tag with the specified tag name if
-        # exists and tag the latest commit with that name
+  # Remove the tag with the specified tag name if
+  # exists and tag the latest commit with that name
 
-        retag = "!f() { \
-            git tag -d "$1" &> /dev/null; \
-            git tag $1; \
-        }; f"
+  retag = "!f() { \
+      git tag -d "$1" &> /dev/null; \
+      git tag $1; \
+  }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
